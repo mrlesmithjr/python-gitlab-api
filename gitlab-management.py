@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 
+"""Manage GitLab using Python."""
+
 import argparse
 from os.path import expanduser
+import json
+import yaml
 import gitlab
 
 __author__ = "Larry Smith Jr."
@@ -18,7 +22,7 @@ def main():
     args = parse_args(home)
     gl = auth(args)
     current_user = user_details(gl)
-    decide_action(args, current_user)
+    decide_action(args, current_user, gl)
 
 
 def auth(args):
@@ -28,16 +32,49 @@ def auth(args):
     return gl
 
 
-def decide_action(args, current_user):
-    if args.action == "manage_ssh_keys":
+def decide_action(args, current_user, gl):
+    """Decide action to take based on positional arguments."""
+    if args.action == "get_all_groups":
+        get_all_groups(args, gl)
+    elif args.action == "manage_ssh_keys":
         ssh_keys(args, current_user)
+
+
+def get_all_groups(args, gl):
+    """Get all groups that exist in account."""
+    # Capture a list of groups
+    all_groups_list = gl.groups.list()
+    # Create dictionary to collect all groups
+    all_groups = {}
+    # Create an array to collect group(s) attributes
+    groups = []
+
+    # Iterate over list of groups
+    for group in all_groups_list:
+        groups.append(group.attributes)
+
+    # Update dictionary with list of groups iterated over
+    all_groups.update({"groups": groups})
+
+    # Check if output flag has been defined to print in either json or yaml
+    if args.output:
+        if args.output == "yaml":
+            print(yaml.dump(yaml.load(json.dumps(all_groups)),
+                            default_flow_style=False))
+        elif args.output == "json":
+            print(json.dumps(all_groups, indent=4))
+    else:
+        print(all_groups)
 
 
 def parse_args(home):
     """Parse CLI arguments."""
     parser = argparse.ArgumentParser(description="Manage GitLab via API.")
     parser.add_argument("action", help="Define action to take.", choices=[
-        "manage_ssh_keys"])
+        "get_all_groups", "manage_ssh_keys"])
+    parser.add_argument(
+        "-o", "--output", help="Output format if desired.",
+        choices=["json", "yaml"])
     parser.add_argument(
         "--sshpubkey", help="Your SSH Key File",
         default="%s/.ssh/id_rsa.pub" % home)
@@ -89,7 +126,7 @@ def user_details(gl):
 
 
 def user_home():
-    """Captures users home directory."""
+    """Capture users home directory."""
     home = expanduser("~")
     return home
 
