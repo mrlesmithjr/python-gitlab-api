@@ -18,7 +18,7 @@ def main():
     args = parse_args(home)
     gl = auth(args)
     current_user = user_details(gl)
-    ssh_keys(args, current_user)
+    decide_action(args, current_user)
 
 
 def auth(args):
@@ -28,9 +28,16 @@ def auth(args):
     return gl
 
 
+def decide_action(args, current_user):
+    if args.action == "manage_ssh_keys":
+        ssh_keys(args, current_user)
+
+
 def parse_args(home):
     """Parse CLI arguments."""
     parser = argparse.ArgumentParser(description="Manage GitLab via API.")
+    parser.add_argument("action", help="Define action to take.", choices=[
+        "manage_ssh_keys"])
     parser.add_argument(
         "--sshpubkey", help="Your SSH Key File",
         default="%s/.ssh/id_rsa.pub" % home)
