@@ -27,7 +27,7 @@ def main():
 
 def auth(args):
     """Authorize user."""
-    gl = gitlab.Gitlab(args.url, args.token)
+    gl = gitlab.Gitlab(args.url, args.token, api_version=args.apiversion)
     gl.auth()
     return gl
 
@@ -159,6 +159,9 @@ def parse_args(home):
     parser.add_argument("action", help="Define action to take.", choices=[
         "get_all_groups", "get_group_details", "get_issues", "get_projects",
         "manage_ssh_keys"])
+    parser.add_argument(
+        "--apiversion", help="Set the API version.", default="4",
+        choices=["3", "4"])
     parser.add_argument(
         "-f", "--filter", help="Filter output.",
         choices=["closed", "namesonly", "opened"])
