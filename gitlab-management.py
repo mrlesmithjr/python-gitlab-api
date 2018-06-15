@@ -121,6 +121,8 @@ def parse_args(home):
         "get_all_groups", "get_group_details", "get_projects",
         "manage_ssh_keys"])
     parser.add_argument(
+        "-f", "--filter", help="Filter output.", choices=["namesonly"])
+    parser.add_argument(
         "-o", "--output", help="Output format if desired.",
         choices=["json", "yaml"])
     parser.add_argument(
