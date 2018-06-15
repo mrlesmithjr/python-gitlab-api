@@ -11,3 +11,33 @@
 ```bash
 python gitlab-management.py get_all_groups --token mysupersecrettoken -o {json,yaml}
 ```
+
+### Display all of your groups details in JSON or YAML output
+
+```bash
+python gitlab-management.py get_group_details --token mysupersecrettoken -o {json,yaml}
+```
+
+### Display all of your projects in JSON or YAML output
+
+```bash
+python gitlab-management.py get_projects --token mysupersecrettoken -o {json,yaml}
+```
+
+### Manage SSH Keys (**Limited for now**)
+
+```bash
+python gitlab-management.py manage_ssh_keys --token mysupersecrettoken
+```
+
+## License
+
+MIT
+
+## Author Information
+
+Larry Smith Jr.
+
+-   [EverythingShouldBeVirtual](http://everythingshouldbevirtual.com)
+-   [@mrlesmithjr](https://www.twitter.com/mrlesmithjr)
+-   <mailto:mrlesmithjr@gmail.com>
