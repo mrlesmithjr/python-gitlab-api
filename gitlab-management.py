@@ -95,7 +95,7 @@ def get_projects(args, gl, current_user):
     user_name = gl.users.list(
         username=user_attrs['username'])[0]
     # Captures users projects
-    projects = user_name.projects.list()
+    projects = user_name.projects.list(all=True)
     # Defines an array to collect all of users projects
     user_projects = []
     # Iterate over each of users projects
