@@ -24,6 +24,18 @@ python gitlab-management.py get_all_groups --token mysupersecrettoken -o {json,y
 python gitlab-management.py get_group_details --token mysupersecrettoken -o {json,yaml}
 ```
 
+### Display all issues in JSON or YAML output
+
+```bash
+python gitlab-management.py get_issues --token mysupersecrettoken -o {json,yaml}
+```
+
+### Display all issues in JSON or YAML output and filter on either opened or closed
+
+```bash
+python gitlab-management.py get_issues --token mysupersecrettoken -o {json,yaml} -f {opened,closed}
+```
+
 ### Display all of your projects in JSON or YAML output
 
 ```bash

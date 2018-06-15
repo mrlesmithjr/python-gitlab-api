@@ -38,6 +38,8 @@ def decide_action(args, current_user, gl):
         get_all_groups(args, gl)
     elif args.action == "get_group_details":
         get_all_groups(args, gl)
+    elif args.action == "get_issues":
+        get_issues(args, gl)
     elif args.action == "get_projects":
         get_projects(args, gl, current_user)
     elif args.action == "manage_ssh_keys":
@@ -92,6 +94,32 @@ def get_group_details(all_groups, args, gl):
             print(gl.groups.get(group_id))
 
 
+def get_issues(args, gl):
+    """Get a list of issues."""
+    # Check if filter has been passed as an argument and
+    # set appropriately if so
+    if args.filter:
+        if args.filter == "closed":
+            issues = gl.issues.list(state="closed")
+        elif args.filter == "opened":
+            issues = gl.issues.list(state="opened")
+    else:
+        issues = gl.issues.list()
+
+    # Iterate over list of issues
+    for issue in issues:
+        issue_attrs = issue.attributes
+        # Check if output flag has been defined to print in either json or yaml
+        if args.output:
+            if args.output == "yaml":
+                print(yaml.dump(yaml.load(json.dumps(issue_attrs)),
+                                default_flow_style=False))
+            elif args.output == "json":
+                print(json.dumps(issue_attrs, indent=4))
+        else:
+            print(issue_attrs)
+
+
 def get_projects(args, gl, current_user):
     """Get users projects."""
     # Defines users attributes
@@ -129,10 +157,11 @@ def parse_args(home):
     """Parse CLI arguments."""
     parser = argparse.ArgumentParser(description="Manage GitLab via API.")
     parser.add_argument("action", help="Define action to take.", choices=[
-        "get_all_groups", "get_group_details", "get_projects",
+        "get_all_groups", "get_group_details", "get_issues", "get_projects",
         "manage_ssh_keys"])
     parser.add_argument(
-        "-f", "--filter", help="Filter output.", choices=["namesonly"])
+        "-f", "--filter", help="Filter output.",
+        choices=["closed", "namesonly", "opened"])
     parser.add_argument(
         "-o", "--output", help="Output format if desired.",
         choices=["json", "yaml"])
