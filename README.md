@@ -24,6 +24,12 @@ python gitlab-management.py get_group_details --token mysupersecrettoken -o {jso
 python gitlab-management.py get_projects --token mysupersecrettoken -o {json,yaml}
 ```
 
+### Display all of your projects in JSON or YAML output and filter on names only
+
+```bash
+python gitlab-management.py get_projects --token mysupersecrettoken -o {json,yaml} -f namesonly
+```
+
 ### Manage SSH Keys (**Limited for now**)
 
 ```bash
