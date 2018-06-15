@@ -3,6 +3,10 @@
 ## Requirements
 
 -   Set up API token in GitLab
+-   The following Python modules are required:
+    -   json
+    -   python-gitlab
+    -   yaml
 
 ## Usage
 
@@ -39,13 +43,13 @@ python gitlab-management.py get_issues --token mysupersecrettoken -o {json,yaml}
 ### Display all of your projects in JSON or YAML output
 
 ```bash
-python gitlab-management.py get_projects --token mysupersecrettoken -o {json,yaml}
+python gitlab-management.py get_user_projects --token mysupersecrettoken -o {json,yaml}
 ```
 
 ### Display all of your projects in JSON or YAML output and filter on names only
 
 ```bash
-python gitlab-management.py get_projects --token mysupersecrettoken -o {json,yaml} -f namesonly
+python gitlab-management.py get_user_projects --token mysupersecrettoken -o {json,yaml} -f namesonly
 ```
 
 ### Manage Runners (**Limited for now**)

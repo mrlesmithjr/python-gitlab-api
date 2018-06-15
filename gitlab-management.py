@@ -40,8 +40,8 @@ def decide_action(args, current_user, gl):
         get_all_groups(args, gl)
     elif args.action == "get_issues":
         get_issues(args, gl)
-    elif args.action == "get_projects":
-        get_projects(args, gl, current_user)
+    elif args.action == "get_user_projects":
+        get_user_projects(args, gl, current_user)
     elif args.action == "manage_runners":
         manage_runners(args, gl)
     elif args.action == "manage_ssh_keys":
@@ -122,7 +122,7 @@ def get_issues(args, gl):
             print(issue_attrs)
 
 
-def get_projects(args, gl, current_user):
+def get_user_projects(args, gl, current_user):
     """Get users projects."""
     # Defines users attributes
     user_attrs = current_user.attributes
@@ -183,7 +183,7 @@ def parse_args(home):
     """Parse CLI arguments."""
     parser = argparse.ArgumentParser(description="Manage GitLab via API.")
     parser.add_argument("action", help="Define action to take.", choices=[
-        "get_all_groups", "get_group_details", "get_issues", "get_projects",
+        "get_all_groups", "get_group_details", "get_issues", "get_user_projects",
         "manage_runners", "manage_ssh_keys"])
     parser.add_argument(
         "--apiversion", help="Set the API version.", default="4",
