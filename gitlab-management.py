@@ -100,8 +100,14 @@ def get_projects(args, gl, current_user):
     user_projects = []
     # Iterate over each of users projects
     for project in projects:
-        user_projects.append(project.attributes)
+        project_attrs = project.attributes
+        if args.filter:
+            if args.filter == "namesonly":
+                user_projects.append(project_attrs['name'])
+        else:
+            user_projects.append(project_attrs)
 
+    user_projects = sorted(user_projects)
     # Check if output flag has been defined to print in either json or yaml
     if args.output:
         if args.output == "yaml":
@@ -111,7 +117,7 @@ def get_projects(args, gl, current_user):
             print(json.dumps(user_projects, indent=4))
     else:
         print(user_projects)
-    return projects
+    return user_projects
 
 
 def parse_args(home):
