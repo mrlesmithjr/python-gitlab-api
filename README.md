@@ -48,6 +48,12 @@ python gitlab-management.py get_projects --token mysupersecrettoken -o {json,yam
 python gitlab-management.py get_projects --token mysupersecrettoken -o {json,yaml} -f namesonly
 ```
 
+### Manage Runners (**Limited for now**)
+
+```bash
+python gitlab-management.py manage_runners --token mysupersecrettoken
+```
+
 ### Manage SSH Keys (**Limited for now**)
 
 ```bash

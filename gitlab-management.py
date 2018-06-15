@@ -42,6 +42,8 @@ def decide_action(args, current_user, gl):
         get_issues(args, gl)
     elif args.action == "get_projects":
         get_projects(args, gl, current_user)
+    elif args.action == "manage_runners":
+        manage_runners(args, gl)
     elif args.action == "manage_ssh_keys":
         ssh_keys(args, current_user)
 
@@ -153,12 +155,36 @@ def get_projects(args, gl, current_user):
     return user_projects
 
 
+def manage_runners(args, gl):
+    """Manage runners."""
+    # Captures all currently registered runners
+    runners_list = gl.runners.list()
+    # Defines an array to collect all runner details
+    runners = []
+    # Iterate over registered runners captured
+    for runner in runners_list:
+        runner_attrs = runner.attributes
+        runner_id = runner_attrs['id']
+        runner_details = gl.runners.get(runner_id)
+        runners.append(runner_details.attributes)
+
+    # Check if output flag has been defined to print in either json or yaml
+    if args.output:
+        if args.output == "yaml":
+            print(yaml.dump(yaml.load(json.dumps(runners)),
+                            default_flow_style=False))
+        elif args.output == "json":
+            print(json.dumps(runners, indent=4))
+    else:
+        print(runners)
+
+
 def parse_args(home):
     """Parse CLI arguments."""
     parser = argparse.ArgumentParser(description="Manage GitLab via API.")
     parser.add_argument("action", help="Define action to take.", choices=[
         "get_all_groups", "get_group_details", "get_issues", "get_projects",
-        "manage_ssh_keys"])
+        "manage_runners", "manage_ssh_keys"])
     parser.add_argument(
         "--apiversion", help="Set the API version.", default="4",
         choices=["3", "4"])
