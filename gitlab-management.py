@@ -38,6 +38,8 @@ def decide_action(args, current_user, gl):
         get_all_groups(args, gl)
     elif args.action == "get_group_details":
         get_all_groups(args, gl)
+    elif args.action == "get_projects":
+        get_projects(args, gl, current_user)
     elif args.action == "manage_ssh_keys":
         ssh_keys(args, current_user)
 
@@ -85,11 +87,39 @@ def get_group_details(all_groups, args, gl):
             print(gl.groups.get(group_id))
 
 
+def get_projects(args, gl, current_user):
+    """Get users projects."""
+    # Defines users attributes
+    user_attrs = current_user.attributes
+    # Defines users user variable to use for capturing users projects
+    user_name = gl.users.list(
+        username=user_attrs['username'])[0]
+    # Captures users projects
+    projects = user_name.projects.list()
+    # Defines an array to collect all of users projects
+    user_projects = []
+    # Iterate over each of users projects
+    for project in projects:
+        user_projects.append(project.attributes)
+
+    # Check if output flag has been defined to print in either json or yaml
+    if args.output:
+        if args.output == "yaml":
+            print(yaml.dump(yaml.load(json.dumps(user_projects)),
+                            default_flow_style=False))
+        elif args.output == "json":
+            print(json.dumps(user_projects, indent=4))
+    else:
+        print(user_projects)
+    return projects
+
+
 def parse_args(home):
     """Parse CLI arguments."""
     parser = argparse.ArgumentParser(description="Manage GitLab via API.")
     parser.add_argument("action", help="Define action to take.", choices=[
-        "get_all_groups", "get_group_details", "manage_ssh_keys"])
+        "get_all_groups", "get_group_details", "get_projects",
+        "manage_ssh_keys"])
     parser.add_argument(
         "-o", "--output", help="Output format if desired.",
         choices=["json", "yaml"])
