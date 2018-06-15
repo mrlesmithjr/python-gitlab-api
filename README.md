@@ -12,6 +12,12 @@
 python gitlab-management.py get_all_groups --token mysupersecrettoken -o {json,yaml}
 ```
 
+### Display all of your groups in JSON or YAML output and filter on names only
+
+```bash
+python gitlab-management.py get_all_groups --token mysupersecrettoken -o {json,yaml} -f namesonly
+```
+
 ### Display all of your groups details in JSON or YAML output
 
 ```bash

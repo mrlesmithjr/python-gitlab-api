@@ -53,7 +53,12 @@ def get_all_groups(args, gl):
 
     # Iterate over list of groups
     for group in all_groups_list:
-        all_groups.append(group.attributes)
+        group_attrs = group.attributes
+        if args.filter and args.action != "get_group_details":
+            if args.filter == "namesonly":
+                all_groups.append(group_attrs['name'])
+        else:
+            all_groups.append(group_attrs)
 
     if args.action == "get_group_details":
         get_group_details(all_groups, args, gl)
