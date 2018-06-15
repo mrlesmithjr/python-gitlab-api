@@ -38,6 +38,8 @@ def decide_action(args, current_user, gl):
         get_all_groups(args, gl)
     elif args.action == "get_group_details":
         get_all_groups(args, gl)
+    elif args.action == "get_group_projects":
+        get_group_projects(args, gl)
     elif args.action == "get_issues":
         get_issues(args, gl)
     elif args.action == "get_user_projects":
@@ -76,7 +78,9 @@ def get_all_groups(args, gl):
             elif args.output == "json":
                 print(json.dumps(all_groups, indent=4))
         else:
-            print(all_groups)
+            if args.action != "get_group_projects":
+                print(all_groups)
+        return all_groups
 
 
 def get_group_details(all_groups, args, gl):
@@ -94,6 +98,32 @@ def get_group_details(all_groups, args, gl):
                 print(json.dumps(group_attrs, indent=4))
         else:
             print(gl.groups.get(group_id))
+
+
+def get_group_projects(args, gl):
+    """Get group based projects."""
+    groups_list = gl.groups.list()
+    groups_projects = []
+    for group in groups_list:
+        group_attrs = group.attributes
+        group_name = group_attrs['name']
+        group_projects = []
+        projects = group.projects.list(all=True)
+        for project in projects:
+            project_attrs = project.attributes
+            group_projects.append(project_attrs)
+        groups_projects.append(group_projects)
+
+    # Check if output flag has been defined to print in either json or yaml
+    if args.output:
+        if args.output == "yaml":
+            print(yaml.dump(yaml.load(json.dumps(groups_projects)),
+                            default_flow_style=False))
+        elif args.output == "json":
+            print(json.dumps(groups_projects, indent=4))
+    else:
+        print(groups_projects)
+
 
 
 def get_issues(args, gl):
@@ -183,8 +213,9 @@ def parse_args(home):
     """Parse CLI arguments."""
     parser = argparse.ArgumentParser(description="Manage GitLab via API.")
     parser.add_argument("action", help="Define action to take.", choices=[
-        "get_all_groups", "get_group_details", "get_issues", "get_user_projects",
-        "manage_runners", "manage_ssh_keys"])
+        "get_all_groups", "get_group_details", "get_group_projects",
+        "get_issues", "get_user_projects", "manage_runners",
+        "manage_ssh_keys"])
     parser.add_argument(
         "--apiversion", help="Set the API version.", default="4",
         choices=["3", "4"])
