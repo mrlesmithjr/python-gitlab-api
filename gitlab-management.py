@@ -103,16 +103,16 @@ def get_group_details(all_groups, args, gl):
 def get_group_projects(args, gl):
     """Get group based projects."""
     groups_list = gl.groups.list()
+    groups_list = sorted(groups_list)
     groups_projects = []
     for group in groups_list:
-        group_attrs = group.attributes
-        group_name = group_attrs['name']
         group_projects = []
         projects = group.projects.list(all=True)
         for project in projects:
             project_attrs = project.attributes
             group_projects.append(project_attrs)
-        groups_projects.append(group_projects)
+        if group_projects != []:
+            groups_projects.append(group_projects)
 
     # Check if output flag has been defined to print in either json or yaml
     if args.output:
@@ -123,7 +123,6 @@ def get_group_projects(args, gl):
             print(json.dumps(groups_projects, indent=4))
     else:
         print(groups_projects)
-
 
 
 def get_issues(args, gl):
