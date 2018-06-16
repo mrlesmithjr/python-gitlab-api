@@ -28,6 +28,12 @@ python gitlab-management.py get_all_groups --token mysupersecrettoken -o {json,y
 python gitlab-management.py get_group_details --token mysupersecrettoken -o {json,yaml}
 ```
 
+### Display all of your groups projects in JSON or YAML output
+
+```bash
+python gitlab-management.py get_group_projects --token mysupersecrettoken -o {json,yaml}
+```
+
 ### Display all issues in JSON or YAML output
 
 ```bash
