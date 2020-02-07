@@ -1,2 +1,2 @@
 gitlab==1.0.2
-PyYAML==3.13
+PyYAML==5.1
