@@ -13,6 +13,7 @@ def main():
     gitlab_connection = auth_user(args)
 
     action_map = {'all-groups': all_groups, 'all-projects': all_projects,
+                  'all-users': all_users,
                   'current-user-attrs': current_user_attrs}
 
     action = action_map[args.action]
@@ -41,6 +42,13 @@ def all_projects(gitlab_connection):
     projects = Projects(gitlab_connection)
     projects_all = projects.all()
     print(json.dumps(projects_all))
+
+
+def all_users(gitlab_connection):
+    """Returns all users."""
+    users = Users(gitlab_connection)
+    users_all = users.all()
+    print(json.dumps(users_all))
 
 
 if __name__ == "__main__":

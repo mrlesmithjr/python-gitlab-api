@@ -29,6 +29,17 @@ python -m python_gitlab_api all-projects --token PersonalAccessToken
 
 ## Users
 
+### All Users
+
+> NOTE: If the GitLab instance is gitlab.com, this retrieves all users. Which
+> could be a huge issue.
+
+To get all users:
+
+```bash
+python -m python_gitlab_api all-users --token PersonalAccessToken
+```
+
 ### Current User Attributes
 
 To view your GitLab user attributes:
