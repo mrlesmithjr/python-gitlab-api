@@ -3,14 +3,6 @@
 This guide shows some of the various usages of using this project. Functionality
 will change over time. So, this is just a subset of use cases.
 
-## User Attributes
-
-To view your GitLab user attributes:
-
-```bash
-python -m python_gitlab_api user-attrs --token PersonalAccessToken
-```
-
 ## Groups
 
 The following is a list of supported functionalities for groups.
@@ -33,4 +25,14 @@ To view all of your GitLab projects:
 
 ```bash
 python -m python_gitlab_api all-projects --token PersonalAccessToken
+```
+
+## Users
+
+### Current User Attributes
+
+To view your GitLab user attributes:
+
+```bash
+python -m python_gitlab_api user-attrs --token PersonalAccessToken
 ```

@@ -2,7 +2,7 @@
 import json
 from python_gitlab_api.actions.groups import Groups
 from python_gitlab_api.actions.projects import Projects
-from python_gitlab_api.actions.user import User
+from python_gitlab_api.actions.users import Users
 from python_gitlab_api.auth.user import auth_user
 from python_gitlab_api.cli import cli_args
 
@@ -13,18 +13,18 @@ def main():
     gitlab_connection = auth_user(args)
 
     action_map = {'all-groups': all_groups, 'all-projects': all_projects,
-                  'user-attrs': user_attrs}
+                  'current-user-attrs': current_user_attrs}
 
     action = action_map[args.action]
     action(gitlab_connection)
 
 
-def user_attrs(gitlab_connection):
+def current_user_attrs(gitlab_connection):
     """Returns attribute information for user."""
 
-    user = User(gitlab_connection)
-    attrs = user.attrs()
-    print(json.dumps(attrs))
+    user = Users(gitlab_connection)
+    user_attrs = user.current_user_attrs()
+    print(json.dumps(user_attrs))
 
 
 def all_groups(gitlab_connection):
