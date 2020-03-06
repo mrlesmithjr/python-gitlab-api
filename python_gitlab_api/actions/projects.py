@@ -16,10 +16,10 @@ class Projects:
 
         projects = {}
 
-        all_projects = self.gitlab_connection.projects.list(
+        all_owned_projects = self.gitlab_connection.projects.list(
             owned=True, all=True)
 
-        for project in all_projects:
+        for project in all_owned_projects:
             project_attrs = project.attributes
             projects[project_attrs['name']] = project_attrs
 
