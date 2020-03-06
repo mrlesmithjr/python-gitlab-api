@@ -7,7 +7,7 @@ and the GitLab API.
 
 ### GitHub Actions
 
-![Molecule Test](https://github.com/mrlesmithjr/python-gitlab-api/workflows/Molecule%20Test/badge.svg)
+![Python Test](https://github.com/mrlesmithjr/python-gitlab-api/workflows/Python%20Test/badge.svg)
 
 ### Travis CI
 
