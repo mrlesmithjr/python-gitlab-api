@@ -23,3 +23,22 @@ class Groups:
             groups[group_attrs['name']] = group_attrs
 
         return groups
+
+    def members(self):
+        """Retrieves all group members and returns them."""
+
+        groups = {}
+
+        all_groups = self.gitlab_connection.groups.list(all=True)
+
+        for group in all_groups:
+            groups[group.name] = {'members': []}
+            members = group.members.list()
+            for member in members:
+                groups[group.name]['members'].append(
+                    {'access_level': member.access_level,
+                     'expires_at': member.expires_at, 'id': member.id,
+                     'name': member.name, 'username': member.username,
+                     'state': member.state})
+
+        return groups

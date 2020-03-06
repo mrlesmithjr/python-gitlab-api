@@ -12,7 +12,9 @@ def main():
     args = cli_args()
     gitlab_connection = auth_user(args)
 
-    action_map = {'all-groups': all_groups, 'all-projects': all_projects,
+    action_map = {'all-groups': all_groups,
+                  'all-groups-members': all_groups_members,
+                  'all-projects': all_projects,
                   'all-users': all_users,
                   'current-user-attrs': current_user_attrs}
 
@@ -34,6 +36,14 @@ def all_groups(gitlab_connection):
     groups = Groups(gitlab_connection)
     groups_all = groups.all()
     print(json.dumps(groups_all))
+
+
+def all_groups_members(gitlab_connection):
+    """Returns all groups and members of each group."""
+
+    groups = Groups(gitlab_connection)
+    members = groups.members()
+    print(json.dumps(members))
 
 
 def all_projects(gitlab_connection):

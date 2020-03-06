@@ -15,6 +15,14 @@ To view all of your GitLab groups:
 python -m python_gitlab_api all-groups --token PersonalAccessToken
 ```
 
+### All Group Members
+
+To get a list of all groups with group members for each group.
+
+```bash
+python -m python_gitlab_api all-groups-members --token PersonalAccessToken
+```
+
 ## Projects
 
 The following are the currently supported functionalities for projects.

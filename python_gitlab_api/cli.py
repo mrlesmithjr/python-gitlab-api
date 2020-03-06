@@ -10,7 +10,8 @@ def cli_args():
 
     parser.add_argument(
         'action', help='Define action to take.', choices=[
-            'all-groups', 'all-projects', 'all-users', 'current-user-attrs'])
+            'all-groups', 'all-groups-members', 'all-projects', 'all-users',
+            'current-user-attrs'])
 
     parser.add_argument('--token', help='Your GitLab API private token.')
     parser.add_argument('--url', help='Your GitLab API Url.',
