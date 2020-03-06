@@ -13,6 +13,7 @@ def cli_args():
             'all-groups', 'all-groups-members', 'all-projects',
             'all-projects-members', 'all-users', 'current-user-attrs'])
 
+    parser.add_argument('--search', help='Filter objects.')
     parser.add_argument('--token', help='Your GitLab API private token.')
     parser.add_argument('--url', help='Your GitLab API Url.',
                         default='https://gitlab.com')

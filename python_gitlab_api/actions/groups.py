@@ -9,14 +9,14 @@ class Groups:
 
         self.gitlab_connection = gitlab_connection
 
-    def all(self):
+    def all(self, search):
         """
         Retrieves all of the groups the user is a member of and returns them.
         """
-
         groups = {}
 
-        all_groups = self.gitlab_connection.groups.list(all=True)
+        all_groups = self.gitlab_connection.groups.list(
+            all=True, search=search)
 
         for group in all_groups:
             group_attrs = group.attributes
@@ -24,12 +24,13 @@ class Groups:
 
         return groups
 
-    def members(self):
+    def members(self, search):
         """Retrieves all group members and returns them."""
 
         groups = {}
 
-        all_groups = self.gitlab_connection.groups.list(all=True)
+        all_groups = self.gitlab_connection.groups.list(
+            all=True, search=search)
 
         for group in all_groups:
             groups[group.name] = {'members': []}

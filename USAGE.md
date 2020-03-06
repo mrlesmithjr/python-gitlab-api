@@ -15,6 +15,14 @@ To view all of your GitLab groups:
 python -m python_gitlab_api all-groups --token PersonalAccessToken
 ```
 
+#### All Groups - Searching
+
+To search for a specific group.
+
+```bash
+python -m python_gitlab_api all-groups --search group --token PersonalAccessToken
+```
+
 ### All Group Members
 
 To get a list of all groups with group members for each group.
@@ -33,6 +41,14 @@ To view all of your GitLab projects:
 
 ```bash
 python -m python_gitlab_api all-projects --token PersonalAccessToken
+```
+
+#### All Projects - Searching
+
+To search for a specific project.
+
+```bash
+python -m python_gitlab_api all-projects --search project --token PersonalAccessToken
 ```
 
 ### All Project Members
@@ -54,6 +70,14 @@ To get all users:
 
 ```bash
 python -m python_gitlab_api all-users --token PersonalAccessToken
+```
+
+#### All Users - Searching
+
+To search for a specific user.
+
+```bash
+python -m python_gitlab_api all-users --search user --token PersonalAccessToken
 ```
 
 ### Current User Attributes

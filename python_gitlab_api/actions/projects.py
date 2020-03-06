@@ -9,7 +9,7 @@ class Projects:
 
         self.gitlab_connection = gitlab_connection
 
-    def all(self):
+    def all(self, search):
         """
         Retrieves all of the users projects and returns them.
         """
@@ -17,7 +17,7 @@ class Projects:
         projects = {}
 
         all_owned_projects = self.gitlab_connection.projects.list(
-            owned=True, all=True)
+            owned=True, all=True, search=search)
 
         for project in all_owned_projects:
             project_attrs = project.attributes
@@ -25,13 +25,13 @@ class Projects:
 
         return projects
 
-    def members(self):
+    def members(self, search):
         """Retrieves all group members and returns them."""
 
         projects = {}
 
         all_owned_projects = self.gitlab_connection.projects.list(
-            owned=True, all=True)
+            owned=True, all=True, search=search)
 
         for project in all_owned_projects:
             projects[project.name] = {'members': []}

@@ -16,13 +16,13 @@ class Users:
 
         return current_user_attrs
 
-    def all(self):
+    def all(self, search):
         """Retrieves all users and returns them."""
         # If the GitLab instance is gitlab.com, this retrieves all users. Which
         # could be a huge issue.
 
         users = {}
-        all_users = self.gitlab_connection.users.list(all=True)
+        all_users = self.gitlab_connection.users.list(all=True, search=search)
 
         for user in all_users:
             users[user.name] = {'id': user.id, 'name': user.name,
