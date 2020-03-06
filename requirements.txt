@@ -1,2 +1,4 @@
-gitlab==1.0.2
-PyYAML==3.13
+# Python requirements for executing
+python-gitlab==2.0.1
+PyYAML==5.3
+requests==2.23.0

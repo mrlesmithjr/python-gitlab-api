@@ -1,74 +1,29 @@
 # python-gitlab-api
 
+This project provides the ability to manage GitLab functionality using python
+and the GitLab API.
+
+## Build Status
+
+### GitHub Actions
+
+![Molecule Test](https://github.com/mrlesmithjr/python-gitlab-api/workflows/Molecule%20Test/badge.svg)
+
+### Travis CI
+
+[![Build Status](https://travis-ci.org/mrlesmithjr/python-gitlab-api.svg?branch=master)](https://travis-ci.org/mrlesmithjr/python-gitlab-api)
+
 ## Requirements
 
--   Set up API token in GitLab
--   The following Python modules are required:
-    -   json
-    -   python-gitlab
-    -   yaml
+- [GitLab API Personal Token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)
+- [requirements.txt](requirements.txt)
+- [requirements-dev.txt](requirements-dev.txt)
+
+## Dependencies
 
 ## Usage
 
-### Display all of your groups in JSON or YAML output
-
-```bash
-python gitlab-management.py get_all_groups --token mysupersecrettoken -o {json,yaml}
-```
-
-### Display all of your groups in JSON or YAML output and filter on names only
-
-```bash
-python gitlab-management.py get_all_groups --token mysupersecrettoken -o {json,yaml} -f namesonly
-```
-
-### Display all of your groups details in JSON or YAML output
-
-```bash
-python gitlab-management.py get_group_details --token mysupersecrettoken -o {json,yaml}
-```
-
-### Display all of your groups projects in JSON or YAML output
-
-```bash
-python gitlab-management.py get_group_projects --token mysupersecrettoken -o {json,yaml}
-```
-
-### Display all issues in JSON or YAML output
-
-```bash
-python gitlab-management.py get_issues --token mysupersecrettoken -o {json,yaml}
-```
-
-### Display all issues in JSON or YAML output and filter on either opened or closed
-
-```bash
-python gitlab-management.py get_issues --token mysupersecrettoken -o {json,yaml} -f {opened,closed}
-```
-
-### Display all of your projects in JSON or YAML output
-
-```bash
-python gitlab-management.py get_user_projects --token mysupersecrettoken -o {json,yaml}
-```
-
-### Display all of your projects in JSON or YAML output and filter on names only
-
-```bash
-python gitlab-management.py get_user_projects --token mysupersecrettoken -o {json,yaml} -f namesonly
-```
-
-### Manage Runners (**Limited for now**)
-
-```bash
-python gitlab-management.py manage_runners --token mysupersecrettoken
-```
-
-### Manage SSH Keys (**Limited for now**)
-
-```bash
-python gitlab-management.py manage_ssh_keys --token mysupersecrettoken
-```
+To view the different usages available checkout the [usage](USAGE.md) guide.
 
 ## License
 
@@ -78,6 +33,8 @@ MIT
 
 Larry Smith Jr.
 
--   [EverythingShouldBeVirtual](http://everythingshouldbevirtual.com)
--   [@mrlesmithjr](https://www.twitter.com/mrlesmithjr)
--   <mailto:mrlesmithjr@gmail.com>
+- [@mrlesmithjr](https://twitter.com/mrlesmithjr)
+- [mrlesmithjr@gmail.com](mailto:mrlesmithjr@gmail.com)
+- [http://everythingshouldbevirtual.com](http://everythingshouldbevirtual.com)
+
+> NOTE: Repo has been created/updated using [https://github.com/mrlesmithjr/cookiecutter-python-project](https://github.com/mrlesmithjr/cookiecutter-python-project) as a template.
