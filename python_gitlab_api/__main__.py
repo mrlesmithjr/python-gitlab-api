@@ -15,6 +15,7 @@ def main():
     action_map = {'all-groups': all_groups,
                   'all-groups-members': all_groups_members,
                   'all-projects': all_projects,
+                  'all-projects-members': all_projects_members,
                   'all-users': all_users,
                   'current-user-attrs': current_user_attrs}
 
@@ -52,6 +53,14 @@ def all_projects(gitlab_connection):
     projects = Projects(gitlab_connection)
     projects_all = projects.all()
     print(json.dumps(projects_all))
+
+
+def all_projects_members(gitlab_connection):
+    """Returns all of the users projects and members of each project."""
+
+    projects = Projects(gitlab_connection)
+    members = projects.members()
+    print(json.dumps(members))
 
 
 def all_users(gitlab_connection):

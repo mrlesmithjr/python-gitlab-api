@@ -35,6 +35,14 @@ To view all of your GitLab projects:
 python -m python_gitlab_api all-projects --token PersonalAccessToken
 ```
 
+### All Project Members
+
+To get a list of all projects with members for each project.
+
+```bash
+python -m python_gitlab_api all-projects-members --token PersonalAccessToken
+```
+
 ## Users
 
 ### All Users
