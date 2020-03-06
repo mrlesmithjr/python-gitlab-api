@@ -1,3 +1,19 @@
+commit 0003d279b4048836670ceb0181b04b0e1423452f
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri Mar 6 14:10:44 2020 -0500
+
+    Fixed: Pylint issues
+    
+    This fixes the majority of the initial Pylint issues.
+
+commit cf143e0e453b8cab269aef50dfa53ea43181f5b3
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri Mar 6 13:56:33 2020 -0500
+
+    First commit of initial refactoring
+    
+    This is the beginning of changes to come
+
 commit d1e044a909bfc7e0b218f8edac3b52e2ad7f2c5c
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Fri Mar 6 13:55:26 2020 -0500
