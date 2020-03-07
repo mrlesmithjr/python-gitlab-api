@@ -36,8 +36,9 @@ class Projects:
         for project in self.owned(search):
             self.projects[project.name] = {'members': []}
 
-            # Retrieve list of members of project
-            members = project.members.list()
+            # Retrieve list of project members recursively
+            # Includes inherited members through ancestor groups
+            members = project.members.all(all=True)
             # Iterate over members of project and lookup member by id
             # Member id's attributes are added
             for member in members:
