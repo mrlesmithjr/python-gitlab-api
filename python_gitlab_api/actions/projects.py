@@ -1,4 +1,5 @@
 """Provides the GitLab Projects class."""
+from python_gitlab_api.actions.users import Users
 
 
 class Projects:
@@ -8,39 +9,50 @@ class Projects:
         """Init a thing"""
 
         self.gitlab_connection = gitlab_connection
+        # Define projects dict
+        self.projects = {}
 
     def all(self, search):
         """
         Retrieves all of the users projects and returns them.
         """
 
-        projects = {}
-
-        all_owned_projects = self.gitlab_connection.projects.list(
-            owned=True, all=True, search=search)
-
-        for project in all_owned_projects:
+        # Iterate through all owned projects
+        for project in self.owned(search):
+            # Define project attributes
             project_attrs = project.attributes
-            projects[project_attrs['name']] = project_attrs
+            # Add project including attributes to projects dict
+            self.projects[project_attrs['name']] = project_attrs
 
-        return projects
+        return self.projects
 
     def members(self, search):
         """Retrieves all group members and returns them."""
 
-        projects = {}
+        # Instantiate Users class in prep of user id lookup
+        users = Users(self.gitlab_connection)
 
+        # Iterate over owned projects
+        for project in self.owned(search):
+            self.projects[project.name] = {'members': []}
+
+            # Retrieve list of members of project
+            members = project.members.list()
+            # Iterate over members of project and lookup member by id
+            # Member id's attributes are added
+            for member in members:
+                self.projects[project.name]['members'].append(
+                    users.lookup(member.id))
+
+        return self.projects
+
+    def owned(self, search):
+        """
+        Retrieve all projects owned by current user based on API connection
+        """
+
+        # Retrieve list of all owned projects for current user
         all_owned_projects = self.gitlab_connection.projects.list(
             owned=True, all=True, search=search)
 
-        for project in all_owned_projects:
-            projects[project.name] = {'members': []}
-            members = project.members.list()
-            for member in members:
-                projects[project.name]['members'].append(
-                    {'access_level': member.access_level,
-                     'expires_at': member.expires_at, 'id': member.id,
-                     'name': member.name, 'username': member.username,
-                     'state': member.state})
-
-        return projects
+        return all_owned_projects

@@ -1,4 +1,5 @@
 """Provides the GitLab Groups class."""
+from python_gitlab_api.actions.users import Users
 
 
 class Groups:
@@ -8,38 +9,46 @@ class Groups:
         """Init a thing"""
 
         self.gitlab_connection = gitlab_connection
+        # Define groups dict
+        self.groups = {}
 
     def all(self, search):
         """
         Retrieves all of the groups the user is a member of and returns them.
         """
-        groups = {}
 
-        all_groups = self.gitlab_connection.groups.list(
-            all=True, search=search)
-
-        for group in all_groups:
+        # Iterate over list of all groups returned
+        for group in self.get(search):
             group_attrs = group.attributes
-            groups[group_attrs['name']] = group_attrs
+            self.groups[group_attrs['name']] = group_attrs
 
-        return groups
+        return self.groups
 
     def members(self, search):
         """Retrieves all group members and returns them."""
 
-        groups = {}
+        # Instantiate Users class in prep of user id lookup
+        users = Users(self.gitlab_connection)
 
+        # Iterate over list of all groups returned
+        for group in self.get(search):
+            self.groups[group.name] = {'members': []}
+
+            # Retrieve list of members of group
+            members = group.members.list()
+            # Iterate over members of group and lookup member by id
+            # Member id's attributes are added
+            for member in members:
+                self.groups[group.name]['members'].append(
+                    users.lookup(member.id))
+
+        return self.groups
+
+    def get(self, search):
+        """Retrieve list of all groups and return them."""
+
+        # Retrieve list of all groups
         all_groups = self.gitlab_connection.groups.list(
             all=True, search=search)
 
-        for group in all_groups:
-            groups[group.name] = {'members': []}
-            members = group.members.list()
-            for member in members:
-                groups[group.name]['members'].append(
-                    {'access_level': member.access_level,
-                     'expires_at': member.expires_at, 'id': member.id,
-                     'name': member.name, 'username': member.username,
-                     'state': member.state})
-
-        return groups
+        return all_groups
