@@ -15,12 +15,14 @@ def cli_args():
 
     parser.add_argument('--search', help='Filter objects.')
     parser.add_argument('--token', help='Your GitLab API private token.')
+    parser.add_argument(
+        '--tokenfile', help='Your GitLab API private token file')
     parser.add_argument('--url', help='Your GitLab API Url.',
                         default='https://gitlab.com')
 
     args = parser.parse_args()
 
-    if args.token is None:
-        parser.error('--token is required')
+    if args.token is None and args.tokenfile is None:
+        parser.error('--token or --tokenfile are required')
 
     return args

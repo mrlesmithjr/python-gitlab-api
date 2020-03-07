@@ -15,9 +15,22 @@ and the GitLab API.
 
 ## Requirements
 
-- [GitLab API Personal Token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)
 - [requirements.txt](requirements.txt)
 - [requirements-dev.txt](requirements-dev.txt)
+
+### GitLab API Personal Token
+
+You will need to create a [GitLab API Personal Token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html) in order to authenticate.
+
+To use your token you will either need to use `--token PersonalAccessToken` or
+create a `gitlab.cfg`, save it somewhere and use `--tokenfile ~/gitlab.cfg`.
+
+The `gitlab.cfg` file should look like:
+
+```bash
+[gitlab]
+token = PersonalAccessToken
+```
 
 ## Dependencies
 
