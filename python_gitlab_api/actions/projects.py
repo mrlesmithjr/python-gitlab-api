@@ -57,3 +57,11 @@ class Projects:
             owned=True, all=True, search=search)
 
         return all_owned_projects
+
+    def get(self, search):
+        projects = self.gitlab_connection.projects.list(search=search)
+        for project in projects:
+            project_attrs = project.attributes
+            self.projects[project.name] = project_attrs
+
+        return self.projects

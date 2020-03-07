@@ -12,7 +12,8 @@ def cli_args():
     parser.add_argument(
         'action', help='Define action to take.', choices=[
             'all-groups', 'all-groups-members', 'all-projects',
-            'all-projects-members', 'all-users', 'current-user-attrs'])
+            'all-projects-members', 'all-users', 'current-user-attrs',
+            'get-projects'])
 
     parser.add_argument('--netrcfile', help='Path to Netrc file',
                         default=os.path.join(
