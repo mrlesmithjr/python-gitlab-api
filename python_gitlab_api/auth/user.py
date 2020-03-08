@@ -1,25 +1,53 @@
 """Provides user authentication to GitLab API."""
 
-from configparser import ConfigParser
+import json
+import netrc
+import sys
 import gitlab
 
 
-def auth_user(args):
-    """Authorize the user using personal access token."""
+class User:
+    """Main user auth class."""
 
-    # If --token is not passed use --tokenfile
-    # --token or --tokenfile are required from python_gitlab_api.cli
-    if args.token is None:
-        parser = ConfigParser()
-        parser.read(args.tokenfile)
+    def __init__(self, args):
+        """Init a thing"""
 
-        # Parse args.tokenfile file to get token
-        token = parser.get('gitlab', 'token')
+        # Set url to --url
+        self.url = args.url
 
-    else:
-        token = args.token
+        # Use --token if passed
+        if args.token is not None:
+            self.token = args.token
+        # Use --netrcfile as fallback
+        # Default is ~/.netrc
+        else:
+            self.netrcfile = args.netrcfile
+            self.token = self.netrc()
 
-    gitlab_connection = gitlab.Gitlab(args.url, token)
-    gitlab_connection.auth()
+    def auth(self):
+        """Authorize user using token to GitLab API."""
 
-    return gitlab_connection
+        gitlab_connection = gitlab.Gitlab(self.url, self.token)
+        gitlab_connection.auth()
+
+        return gitlab_connection
+
+    def netrc(self):
+        """Use Netrc default or --netrcfile if passed as fallback."""
+
+        try:
+            parser = netrc.netrc(self.netrcfile)
+
+            # Strip http from url for proper netrc machine lookup
+            machine = self.url.replace('http://', '')
+            # Strip https from url for proper netrc machine lookup
+            machine = self.url.replace('https://', '')
+
+            # Parse machine lookup values from netrc. Only need password
+            _login, _username, password = parser.authenticators(machine)
+
+            return password
+
+        except FileNotFoundError as error:
+            print(json.dumps({'error': f'{error}'}))
+            sys.exit(1)

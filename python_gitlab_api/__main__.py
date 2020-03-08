@@ -3,14 +3,15 @@ import json
 from python_gitlab_api.actions.groups import Groups
 from python_gitlab_api.actions.projects import Projects
 from python_gitlab_api.actions.users import Users
-from python_gitlab_api.auth.user import auth_user
+from python_gitlab_api.auth.user import User
 from python_gitlab_api.cli import cli_args
 
 
 def main():
     """Main function."""
     args = cli_args()
-    gitlab_connection = auth_user(args)
+    user = User(args)
+    gitlab_connection = user.auth()
 
     action_map = {'all-groups': all_groups,
                   'all-groups-members': all_groups_members,
