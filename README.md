@@ -23,13 +23,13 @@ and the GitLab API.
 You will need to create a [GitLab API Personal Token](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html) in order to authenticate.
 
 To use your token you will either need to use `--token PersonalAccessToken` or
-create a `gitlab.cfg`, save it somewhere and use `--tokenfile ~/gitlab.cfg`.
+create/edit a `~/.netrc`.
 
-The `gitlab.cfg` file should look like:
+The `~/.netrc` file should look like:
 
 ```bash
-[gitlab]
-token = PersonalAccessToken
+machine gitlab.com
+password = PersonalAccessToken
 ```
 
 ## Dependencies

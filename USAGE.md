@@ -3,6 +3,30 @@
 This guide shows some of the various usages of using this project. Functionality
 will change over time. So, this is just a subset of use cases.
 
+## Help
+
+```bash
+python -m python_gitlab_api --help
+...
+usage: __main__.py [-h] [--netrcfile NETRCFILE] [--search SEARCH]
+                   [--token TOKEN] [--url URL]
+                   {all-groups,all-groups-members,all-projects,all-projects-members,all-users,current-user-attrs}
+
+Manage GitLab via API.
+
+positional arguments:
+  {all-groups,all-groups-members,all-projects,all-projects-members,all-users,current-user-attrs}
+                        Define action to take.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --netrcfile NETRCFILE
+                        Path to Netrc file
+  --search SEARCH       Filter objects.
+  --token TOKEN         Your GitLab API private token.
+  --url URL             Your GitLab API Url.
+```
+
 ## Groups
 
 The following is a list of supported functionalities for groups.
