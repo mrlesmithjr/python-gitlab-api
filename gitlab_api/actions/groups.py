@@ -1,5 +1,5 @@
 """Provides the GitLab Groups class."""
-from python_gitlab_api.actions.users import Users
+from gitlab_api.actions.users import Users
 
 
 class Groups:

@@ -6,7 +6,7 @@ will change over time. So, this is just a subset of use cases.
 ## Help
 
 ```bash
-python -m python_gitlab_api --help
+python -m gitlab_api --help
 ...
 usage: __main__.py [-h] [--netrcfile NETRCFILE] [--search SEARCH]
                    [--token TOKEN] [--url URL]
@@ -36,7 +36,7 @@ The following is a list of supported functionalities for groups.
 To view all of your GitLab groups:
 
 ```bash
-python -m python_gitlab_api all-groups --token PersonalAccessToken
+python -m gitlab_api all-groups --token PersonalAccessToken
 ```
 
 #### All Groups - Searching
@@ -44,7 +44,7 @@ python -m python_gitlab_api all-groups --token PersonalAccessToken
 To search for a specific group.
 
 ```bash
-python -m python_gitlab_api all-groups --search group --token PersonalAccessToken
+python -m gitlab_api all-groups --search group --token PersonalAccessToken
 ```
 
 ### All Group Members
@@ -52,7 +52,7 @@ python -m python_gitlab_api all-groups --search group --token PersonalAccessToke
 To get a list of all groups with group members for each group.
 
 ```bash
-python -m python_gitlab_api all-groups-members --token PersonalAccessToken
+python -m gitlab_api all-groups-members --token PersonalAccessToken
 ```
 
 ## Projects
@@ -64,7 +64,7 @@ The following are the currently supported functionalities for projects.
 To view all of your GitLab projects:
 
 ```bash
-python -m python_gitlab_api all-projects --token PersonalAccessToken
+python -m gitlab_api all-projects --token PersonalAccessToken
 ```
 
 #### All Projects - Searching
@@ -72,7 +72,7 @@ python -m python_gitlab_api all-projects --token PersonalAccessToken
 To search for a specific project.
 
 ```bash
-python -m python_gitlab_api all-projects --search project --token PersonalAccessToken
+python -m gitlab_api all-projects --search project --token PersonalAccessToken
 ```
 
 ### All Project Members
@@ -80,7 +80,7 @@ python -m python_gitlab_api all-projects --search project --token PersonalAccess
 To get a list of all projects with members for each project.
 
 ```bash
-python -m python_gitlab_api all-projects-members --token PersonalAccessToken
+python -m gitlab_api all-projects-members --token PersonalAccessToken
 ```
 
 ## Users
@@ -93,7 +93,7 @@ python -m python_gitlab_api all-projects-members --token PersonalAccessToken
 To get all users:
 
 ```bash
-python -m python_gitlab_api all-users --token PersonalAccessToken
+python -m gitlab_api all-users --token PersonalAccessToken
 ```
 
 #### All Users - Searching
@@ -101,7 +101,7 @@ python -m python_gitlab_api all-users --token PersonalAccessToken
 To search for a specific user.
 
 ```bash
-python -m python_gitlab_api all-users --search user --token PersonalAccessToken
+python -m gitlab_api all-users --search user --token PersonalAccessToken
 ```
 
 ### Current User Attributes
@@ -109,5 +109,5 @@ python -m python_gitlab_api all-users --search user --token PersonalAccessToken
 To view your GitLab user attributes:
 
 ```bash
-python -m python_gitlab_api user-attrs --token PersonalAccessToken
+python -m gitlab_api user-attrs --token PersonalAccessToken
 ```

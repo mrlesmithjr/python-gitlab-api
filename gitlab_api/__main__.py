@@ -1,14 +1,15 @@
 """Main module."""
 import json
-from python_gitlab_api.actions.groups import Groups
-from python_gitlab_api.actions.projects import Projects
-from python_gitlab_api.actions.users import Users
-from python_gitlab_api.auth.user import User
-from python_gitlab_api.cli import cli_args
+from gitlab_api.actions.groups import Groups
+from gitlab_api.actions.projects import Projects
+from gitlab_api.actions.users import Users
+from gitlab_api.auth.user import User
+from gitlab_api.cli import cli_args
 
 
 def main():
     """Main function."""
+
     args = cli_args()
     user = User(args)
     gitlab_connection = user.auth()
@@ -18,7 +19,8 @@ def main():
                   'all-projects': all_projects,
                   'all-projects-members': all_projects_members,
                   'all-users': all_users,
-                  'current-user-attrs': current_user_attrs}
+                  'current-user-attrs': current_user_attrs,
+                  'get-projects': get_projects}
 
     search = args.search
 
@@ -68,9 +70,18 @@ def all_projects_members(gitlab_connection, search):
 
 def all_users(gitlab_connection, search):
     """Returns all users."""
+
     users = Users(gitlab_connection)
     users_all = users.all(search)
     print(json.dumps(users_all))
+
+
+def get_projects(gitlab_connection, search):
+    """Returns project(s) based on --search."""
+
+    projects = Projects(gitlab_connection)
+    project = projects.get(search)
+    print(json.dumps(project))
 
 
 if __name__ == "__main__":
