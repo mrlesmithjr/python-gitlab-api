@@ -1,10 +1,10 @@
 """Main module."""
 import json
-from python_gitlab_api.actions.groups import Groups
-from python_gitlab_api.actions.projects import Projects
-from python_gitlab_api.actions.users import Users
-from python_gitlab_api.auth.user import User
-from python_gitlab_api.cli import cli_args
+from gitlab_api.actions.groups import Groups
+from gitlab_api.actions.projects import Projects
+from gitlab_api.actions.users import Users
+from gitlab_api.auth.user import User
+from gitlab_api.cli import cli_args
 
 
 def main():

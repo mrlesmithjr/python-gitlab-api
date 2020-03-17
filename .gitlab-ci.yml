@@ -12,9 +12,9 @@ stages:
 flake8:
   stage: linting
   script:
-    - flake8 python_gitlab_api/
+    - flake8 gitlab_api/
 
 pylint:
   stage: linting
   script:
-    - pylint python_gitlab_api/
+    - pylint gitlab_api/

@@ -1,5 +1,5 @@
 """Provides the GitLab Projects class."""
-from python_gitlab_api.actions.users import Users
+from gitlab_api.actions.users import Users
 
 
 class Projects:
